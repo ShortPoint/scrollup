@@ -1,4 +1,4 @@
-# ScrollUp [![Build Status](https://travis-ci.org/markgoodyear/scrollup.svg?branch=master)](https://travis-ci.org/markgoodyear/scrollup) [![devDependency Status](https://david-dm.org/markgoodyear/scrollup/dev-status.svg)](https://david-dm.org/markgoodyear/scrollup#info=devDependencies)
+# ScrollUp 
 > A jQuery plugin to create a customisable 'Scroll to top' feature that will work with any website
 
 ## Installing with Bower
@@ -6,7 +6,7 @@
 To install scrollUp with Bower:
 
 ```bash
-bower install scrollup
+# bower install scrollup
 ```
 
 ## How to use
@@ -48,7 +48,7 @@ $(function () {
 
 To create a visible line to help determine an ideal scroll distance from the top,
 assign a valid CSS colour to the `activeOverlay` setting. This could be HEX, HSLA or RGB(A).
-Example: `activeOverlay: '#00FFFF'`. <a href="http://markgoodyear.com/labs/scrollup" target="_blank">See the demo for an example</a>.
+Example: `activeOverlay: '#00FFFF'`. 
 
 
 ### scrollFrom
@@ -90,8 +90,3 @@ This will allow you to set a background image in your CSS file.
 ## Contributing
 
 Please see [CONTRIBUTE.md](CONTRIBUTE.md) for info on contributing.
-
-
-## Demo
-
-<a href="http://markgoodyear.com/labs/scrollup/" target="_blank">Check out the demo</a> for more style and feature examples.
