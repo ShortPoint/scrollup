@@ -1,4 +1,4 @@
-# ScrollUp 
+# ScrollUp
 > A jQuery plugin to create a customisable 'Scroll to top' feature that will work with any website
 
 ## Installing with Bower
@@ -39,7 +39,8 @@ $(function () {
         scrollTitle: false,          // Set a custom <a> title if required.
         scrollImg: false,            // Set true to use image
         activeOverlay: false,        // Set CSS color to display scrollUp active point, e.g '#00FFFF'
-        zIndex: 2147483647           // Z-Index for the overlay
+        zIndex: 2147483647,          // Z-Index for the overlay
+        scrollContainer: window
     });
 });
 ```
@@ -48,7 +49,7 @@ $(function () {
 
 To create a visible line to help determine an ideal scroll distance from the top,
 assign a valid CSS colour to the `activeOverlay` setting. This could be HEX, HSLA or RGB(A).
-Example: `activeOverlay: '#00FFFF'`. 
+Example: `activeOverlay: '#00FFFF'`.
 
 
 ### scrollFrom
@@ -85,8 +86,3 @@ Below is a basic style example:
 
 To use a background image instead of text, simply set `scrollImg: true`.
 This will allow you to set a background image in your CSS file.
-
-
-## Contributing
-
-Please see [CONTRIBUTE.md](CONTRIBUTE.md) for info on contributing.

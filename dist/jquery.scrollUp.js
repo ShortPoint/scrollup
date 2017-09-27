@@ -40,7 +40,7 @@
             $self.attr('title', o.scrollTitle);
         }
 
-        $self.appendTo('body');
+        $self.appendTo(document.body);
 
         // If not using an image display text
         if (!(o.scrollImg || o.scrollTrigger)) {
@@ -95,8 +95,8 @@
         }
 
         // Scroll function
-        scrollEvent = $(window).scroll(function () {
-            if ($(window).scrollTop() > scrollDis) {
+        scrollEvent = $(o.scrollContainer).scroll(function () {
+            if ($(o.scrollContainer).scrollTop() > scrollDis) {
                 if (!triggerVisible) {
                     $self[animIn](animSpeed);
                     triggerVisible = true;
@@ -123,7 +123,11 @@
         $self.click(function (e) {
             e.preventDefault();
 
-            $('html, body').animate({
+            var el = o.scrollContainer;
+            if( el === window ) {
+              el = 'html, body'
+            }
+            $(el).animate({
                 scrollTop: scrollTarget
             }, o.scrollSpeed, o.easingType);
         });
@@ -144,7 +148,8 @@
         scrollTitle: false,          // Set a custom <a> title if required. Defaults to scrollText
         scrollImg: false,            // Set true to use image
         activeOverlay: false,        // Set CSS color to display scrollUp active point, e.g '#00FFFF'
-        zIndex: 2147483647           // Z-Index for the overlay
+        zIndex: 2147483647,          // Z-Index for the overlay
+        scrollContainer: window
     };
 
     // Destroy scrollUp plugin and clean all modifications to the DOM
@@ -155,11 +160,11 @@
 
         // If 1.7 or above use the new .off()
         if ($.fn.jquery.split('.')[1] >= 7) {
-            $(window).off('scroll', scrollEvent);
+            $($.fn.scrollUp.settings.scrollContainer).off('scroll', scrollEvent);
 
         // Else use the old .unbind()
         } else {
-            $(window).unbind('scroll', scrollEvent);
+            $($.fn.scrollUp.settings.scrollContainer).unbind('scroll', scrollEvent);
         }
     };
 
