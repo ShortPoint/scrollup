@@ -6,7 +6,7 @@
 To install scrollUp with Bower:
 
 ```bash
-# bower install scrollup
+# bower install scrollup-2
 ```
 
 ## How to use
