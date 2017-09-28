@@ -38,12 +38,12 @@ $(function () {
         scrollText: 'Scroll to top', // Text for element, can contain HTML
         scrollTitle: false,          // Set a custom <a> title if required. Defaults to scrollText
         scrollImg: false,            // Set true to use image
-        scrollContainer: window,		 // in case page has special scrollbars, can accept a jQuery object, dom element, or a string selector
-        scrollHref: '#top',					 // href attribute that will be added to scroll target ( in case its not custom ), in case your application might contain other links with `#top` as an href
+        scrollContainer: window,     // in case page has special scrollbars, can accept a jQuery object, dom element, or a string selector
+        scrollHref: '#top',          // href attribute that will be added to scroll target ( in case its not custom ), in case your application might contain other links with `#top` as an href
         activeOverlay: false,        // Set CSS color to display scrollUp active point, e.g '#00FFFF'
         zIndex: 2147483647,          // Z-Index for the overlay
-        throttle: null,							 // most apps have throttle implelemted, provide a reference here, and scroll handler will be throttled ( e.g: `_.throttle` should work )
-        throttleWait: 300 				   // throttle wait parameter
+        throttle: null,              // most apps have throttle implelemted, provide a reference here, and scroll handler will be throttled ( e.g: `_.throttle` should work )
+        throttleWait: 300            // throttle wait parameter
     });
 });
 ```
