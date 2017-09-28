@@ -25,7 +25,7 @@
         } else {
             $self = $('<a/>', {
                 id: o.scrollName,
-                href: '#top'
+                href: o.scrollHref
             });
         }
 
@@ -34,7 +34,7 @@
             $self.attr('title', o.scrollTitle);
         }
 
-        $self.appendTo(document.body);
+        $self.appendTo(o.scrollContainer);
 
         // If not using an image display text
         if (!(o.scrollImg || o.scrollTrigger)) {
@@ -85,11 +85,11 @@
         if (o.scrollFrom === 'top') {
             scrollDis = o.scrollDistance;
         } else {
-            scrollDis = $(document).height() - $(window).height() - o.scrollDistance;
+            scrollDis = $(document).height() - $(o.scrollContainer).height() - o.scrollDistance;
         }
 
         // Scroll function
-        scrollEvent = $(o.scrollContainer).scroll(function () {
+				var fnScrollHandler = function () {
             if ($(o.scrollContainer).scrollTop() > scrollDis) {
                 if (!triggerVisible) {
                     $self[animIn](animSpeed);
@@ -101,7 +101,15 @@
                     triggerVisible = false;
                 }
             }
-        });
+        };
+
+				// for better performance, allow throtteling scroll handler
+				if( typeof o.throttle === 'function' ) {
+					var fnThrottled = o.throttle(fnScrollHandler, o.throttleWait);
+					scrollEvent = $(o.scrollContainer).scroll(fnThrottled);
+				} else {
+					scrollEvent = $(o.scrollContainer).scroll(fnScrollHandler);
+				}
 
         if (o.scrollTarget) {
             if (typeof o.scrollTarget === 'number') {
@@ -113,13 +121,16 @@
             scrollTarget = 0;
         }
 
+				// trigger initial scroll handler just in case scroll container is already scrolled
+				fnScrollHandler();
+
         // To the top
         $self.click(function (e) {
             e.preventDefault();
 
             var el = o.scrollContainer;
             if( el === window ) {
-              el = 'html, body'
+              el = 'html, body';
             }
             $(el).animate({
                 scrollTop: scrollTarget
@@ -141,13 +152,20 @@
         scrollText: 'Scroll to top', // Text for element, can contain HTML
         scrollTitle: false,          // Set a custom <a> title if required. Defaults to scrollText
         scrollImg: false,            // Set true to use image
+				scrollContainer: window,		 // scrollable container
+				scrollHref: '#top',					 // href attribute that will be added to scroll target ( in case its not custom )
         activeOverlay: false,        // Set CSS color to display scrollUp active point, e.g '#00FFFF'
         zIndex: 2147483647,          // Z-Index for the overlay
-        scrollContainer: window
+				throttle: null,							 // most apps have throttle implelemted, e.g: `_.throttle` should work
+				throttleWait: 300 				   // throttle wait parameter
     };
 
     // Destroy scrollUp plugin and clean all modifications to the DOM
     $.fn.scrollUp.destroy = function (scrollEvent) {
+        // no scrollup instance has been created, no need to do anything here
+        if( !$.data(document.body, 'scrollUp') ) {
+          return;
+        }
         $.removeData(document.body, 'scrollUp');
         $('#' + $.fn.scrollUp.settings.scrollName).remove();
         $('#' + $.fn.scrollUp.settings.scrollName + '-active').remove();

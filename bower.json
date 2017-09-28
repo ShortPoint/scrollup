@@ -1,6 +1,6 @@
 {
   "name": "scrollup-2",
-  "version": "2.4.2",
+  "version": "2.4.3",
   "main": "dist/jquery.scrollUp.min.js",
   "ignore": [
     "css",
